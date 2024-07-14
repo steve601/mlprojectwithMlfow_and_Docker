@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: url('https://via.placeholder.com/1500x1000') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2{
+            color: black;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Diagnosis</h1>
+        <p>Enter your details below to diagnose the probability of having diabetes.</p>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="preg">Pregnancies</label>
+                <input type="number" id="preg" name="preg" min=0 value="{{request.form.preg if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="glc">Glucose level</label>
+                <input type="number" id="glc" name="glc" min=0 value="{{request.form.glc if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="bld">Blood pressure</label>
+                <input type="number" id="bld" name="bld" step="0.1" min=0 value="{{request.form.bld if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="skin">Skin thickness</label>
+                <input type="number" id="skin" name="skin"  min=0 value="{{request.form.skin if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="bmi">Insulin</label>
+                <input type="number" id="ins" name="ins"  min=0 value="{{request.form.ins if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="bmi">BMI</label>
+                <input type="number" id="bmi" name="bmi" step="0.1" min=0 value="{{request.form.bmi if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="diabetespedigreefunction">Probability of diabetes based on family history</label>
+                <input type="number" id="diabetespedigreefunction" name="diabetespedigreefunction" step="0.1" min=0 max=1 value="{{request.form.diabetespedigreefunction if request.form else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min=10 value="{{request.form.age if request.form else '' }}" required>
+            </div>
+            <button type="submit">Diagnose</button>
+        </form>
+    </div>
+    <h2>{{ text }}</h2>
+</body>
+</html>
